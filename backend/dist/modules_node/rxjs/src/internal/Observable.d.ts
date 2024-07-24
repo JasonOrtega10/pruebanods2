@@ -1,0 +1,31 @@
+import { Operator } from './Operator';
+import { Subscriber } from './Subscriber';
+import { Subscription } from './Subscription';
+import { TeardownLogic, OperatorFunction, Subscribable, Observer } from './types';
+export declare class Observable<T> implements Subscribable<T> {
+    source: Observable<any> | undefined;
+    operator: Operator<any, T> | undefined;
+    constructor(subscribe?: (this: Observable<T>, subscriber: Subscriber<T>) => TeardownLogic);
+    static create: (...args: any[]) => any;
+    lift<R>(operator?: Operator<T, R>): Observable<R>;
+    subscribe(observerOrNext?: Partial<Observer<T>> | ((value: T) => void)): Subscription;
+    subscribe(next?: ((value: T) => void) | null, error?: ((error: any) => void) | null, complete?: (() => void) | null): Subscription;
+    protected _trySubscribe(sink: Subscriber<T>): TeardownLogic;
+    forEach(next: (value: T) => void): Promise<void>;
+    forEach(next: (value: T) => void, promiseCtor: PromiseConstructorLike): Promise<void>;
+    protected _subscribe(subscriber: Subscriber<any>): TeardownLogic;
+    pipe(): Observable<T>;
+    pipe<A>(op1: OperatorFunction<T, A>): Observable<A>;
+    pipe<A, B>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>): Observable<B>;
+    pipe<A, B, C>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>): Observable<C>;
+    pipe<A, B, C, D>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>, op4: OperatorFunction<C, D>): Observable<D>;
+    pipe<A, B, C, D, E>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>, op4: OperatorFunction<C, D>, op5: OperatorFunction<D, E>): Observable<E>;
+    pipe<A, B, C, D, E, F>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>, op4: OperatorFunction<C, D>, op5: OperatorFunction<D, E>, op6: OperatorFunction<E, F>): Observable<F>;
+    pipe<A, B, C, D, E, F, G>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>, op4: OperatorFunction<C, D>, op5: OperatorFunction<D, E>, op6: OperatorFunction<E, F>, op7: OperatorFunction<F, G>): Observable<G>;
+    pipe<A, B, C, D, E, F, G, H>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>, op4: OperatorFunction<C, D>, op5: OperatorFunction<D, E>, op6: OperatorFunction<E, F>, op7: OperatorFunction<F, G>, op8: OperatorFunction<G, H>): Observable<H>;
+    pipe<A, B, C, D, E, F, G, H, I>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>, op4: OperatorFunction<C, D>, op5: OperatorFunction<D, E>, op6: OperatorFunction<E, F>, op7: OperatorFunction<F, G>, op8: OperatorFunction<G, H>, op9: OperatorFunction<H, I>): Observable<I>;
+    pipe<A, B, C, D, E, F, G, H, I>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>, op4: OperatorFunction<C, D>, op5: OperatorFunction<D, E>, op6: OperatorFunction<E, F>, op7: OperatorFunction<F, G>, op8: OperatorFunction<G, H>, op9: OperatorFunction<H, I>, ...operations: OperatorFunction<any, any>[]): Observable<unknown>;
+    toPromise(): Promise<T | undefined>;
+    toPromise(PromiseCtor: typeof Promise): Promise<T | undefined>;
+    toPromise(PromiseCtor: PromiseConstructorLike): Promise<T | undefined>;
+}

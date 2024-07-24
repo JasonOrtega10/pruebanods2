@@ -1,0 +1,10 @@
+import { SchedulerLike, ValueFromArray } from '../types';
+import { Observable } from '../Observable';
+export declare function of(value: null): Observable<null>;
+export declare function of(value: undefined): Observable<undefined>;
+export declare function of(scheduler: SchedulerLike): Observable<never>;
+export declare function of<A extends readonly unknown[]>(...valuesAndScheduler: [...A, SchedulerLike]): Observable<ValueFromArray<A>>;
+export declare function of(): Observable<never>;
+export declare function of<T>(): Observable<T>;
+export declare function of<T>(value: T): Observable<T>;
+export declare function of<A extends readonly unknown[]>(...values: A): Observable<ValueFromArray<A>>;
